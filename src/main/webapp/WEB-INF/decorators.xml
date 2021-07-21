@@ -1,0 +1,22 @@
+<decorators defaultdir="/WEB-INF/views/layouts">
+
+	<!-- tên name là mình tự đặt để phân biệt , còn page là nơi layout mình 
+		mún áp dụng qua đường dẫn mặc định ở trên -->
+	<decorator name="user" page="masterlayout-user.jsp">
+		<pattern>
+			/*
+		</pattern>
+	</decorator>
+
+	<decorator name="admin" page="masterlayout-admin.jsp">
+		<pattern>
+			/admin/*
+		</pattern>
+		<pattern>
+			/admin
+		</pattern>
+	</decorator>
+
+
+
+</decorators>

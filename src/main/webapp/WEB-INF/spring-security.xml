@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  
+    http://www.springframework.org/schema/security 
+    http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+	<http create-session="ifRequired" use-expressions="true" auto-config="true" >
+		<csrf disabled="true" />
+
+		<intercept-url pattern="/" access="permitAll()" />
+		<intercept-url pattern="/login" access="permitAll()" />
+		<intercept-url pattern="/logout" access="permitAll()" />
+		<intercept-url pattern="/checkout" access="isAuthenticated()" />
+
+
+		<intercept-url pattern="/userInfo" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/other/**" access="isAuthenticated()" />
+
+		<access-denied-handler  ref="customAccessDeniedHandler" />
+		
+
+
+		<form-login login-page='/Login'
+			login-processing-url="/j_spring_security_check"
+			default-target-url="/" 
+			always-use-default-target="true"  
+			authentication-success-handler-ref="MyAuthenticationSuccessHandler"
+			authentication-failure-url="/Login?error=true"
+			username-parameter="username" password-parameter="password" />
+
+		<logout logout-url="/logout"
+			logout-success-url="/Login" 
+			delete-cookies="JSESSIONID"
+			invalidate-session="true" />
+
+	</http>
+	
+<!-- authentication-success-handler-ref="MyAuthenticationSuccessHandler" -->
+<!-- Sucees chuyển hướng -->
+ <beans:bean id="MyAuthenticationSuccessHandler"
+  class="WhiskyShop.Config.Security.MyAuthenticationSuccessHandler" /> 
+  
+  <!--Deneied chuyển hướng  -->
+ <beans:bean name="customAccessDeniedHandler" 
+  class="WhiskyShop.Config.Security.CustomAccessDeniedHandler" />
+
+
+	<authentication-manager>
+		<authentication-provider>
+		<!--  LƯU Ý CÁI PASSWORD ENCODER NÀY -->
+			<password-encoder hash="bcrypt" />
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select username,password,enabled from users where username=?"
+				authorities-by-username-query="select users.username, role.name 
+											   from users, role, users_roles 
+            									where username =? and users.id = users_roles.user
+            										 and users_roles.role = role.id " />
+		</authentication-provider>
+
+	</authentication-manager>
+
+
+
+
+</beans:beans>

@@ -28,6 +28,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
+
 <!-- 		<c:url value="/assets/admin/ "/>		 -->
 
 <link rel="stylesheet"

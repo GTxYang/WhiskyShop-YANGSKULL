@@ -2,20 +2,48 @@ package WhiskyShop.Entity;
 
 import java.sql.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
+
 public class Products  {
 	private long id;
 	private  int id_category ;
 	private  int id_brand ;
+	private MultipartFile multipartFile;
+	public MultipartFile getMultipartFile() {
+		return multipartFile;
+	}
+	public void setMultipartFile(MultipartFile multipartFile) {
+		this.multipartFile = multipartFile;
+	}
+	@NotNull(message = "Không được để trống volumn")
 	private  int volumn ;
+	
+	@NotNull(message = "Không được để trống ml")
 	private  int ml ;
+	
+	@NotBlank(message = "Không được để trống origin")
 	private  String origin ;
+	
+	@NotBlank(message = "Không được để trống origin")
 	private  String name ;
+	
+	@NotNull(message = "Không được để trống price")
 	private double price ;
+	
 	private  int sale ;
+	
+	@NotBlank(message = "Không được để trống title")
 	private String title ;
+	
 	private boolean highlight ;
 	private  boolean new_product ;
+	
+	@NotBlank(message = "Không được để trống detail")
 	private  String detail ;
+	
 	private  Date created_at ;
 	private  Date updated_at ;
 	private  String img;

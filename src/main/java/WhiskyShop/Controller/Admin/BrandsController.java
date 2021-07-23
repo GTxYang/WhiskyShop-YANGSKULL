@@ -42,6 +42,8 @@ public class BrandsController extends BaseAdminController {
 		_mvShare.setViewName("admin/brands/addBrand");
 		return _mvShare;
 	}
+	
+	
 
 	@GetMapping("editBrand")
 	public String View_EditBrand(@RequestParam("id") int id, @ModelAttribute("brand") Brands brand, ModelMap model) {

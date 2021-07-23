@@ -70,7 +70,7 @@ public class RoleController extends BaseAdminController {
 	public ModelAndView updateRole(@RequestParam("id") int id,@RequestParam(value = "status", required = false) String status, ModelMap model)
 	{
 		//model.addAttribute("roleInfo1",roleService.FindRoleByID(id));	
-		model.addAttribute("a","helloooo");
+
 		model.addAttribute("status", status);
 		_mvShare.addObject("roleInfo1",roleService.FindRoleByID(id));	
 		_mvShare.setViewName("admin/role/editRole");

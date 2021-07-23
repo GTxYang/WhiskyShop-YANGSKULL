@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java/WhiskyShop/Controller/Admin/BrandsController.java=UTF-8
 encoding//src/main/java/WhiskyShop/Controller/Admin/CategorysController.java=UTF-8
+encoding//src/main/java/WhiskyShop/Controller/Admin/ProductsController.java=UTF-8
 encoding//src/main/java/WhiskyShop/Controller/Admin/RoleController.java=UTF-8
 encoding//src/main/java/WhiskyShop/Controller/Admin/UserRoleController.java=UTF-8
 encoding//src/main/java/WhiskyShop/Controller/Admin/UsersController.java=UTF-8
@@ -18,6 +19,7 @@ encoding//src/main/java/WhiskyShop/Dao/UserRoleDao.java=UTF-8
 encoding//src/main/java/WhiskyShop/Entity/Brands.java=UTF-8
 encoding//src/main/java/WhiskyShop/Entity/Categorys.java=UTF-8
 encoding//src/main/java/WhiskyShop/Entity/MapperSlides.java=UTF-8
+encoding//src/main/java/WhiskyShop/Entity/Products.java=UTF-8
 encoding//src/main/java/WhiskyShop/Entity/Users.java=UTF-8
 encoding//src/main/java/WhiskyShop/Service/Admin/IBrandsAdmin.java=UTF-8
 encoding//src/main/java/WhiskyShop/Service/User/PaginateServiceImpl.java=UTF-8

@@ -81,9 +81,12 @@
 	</filter-mapping>
 
 
-	<!-- <error-page>
-		<error-code>403</error-code>
+
+
+
+	<error-page>
+	
 		<location>/404</location>
-	</error-page> -->
+	</error-page>
 </web-app>
 

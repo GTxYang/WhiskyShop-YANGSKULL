@@ -22,4 +22,5 @@ encoding//src/main/java/WhiskyShop/Entity/MapperSlides.java=UTF-8
 encoding//src/main/java/WhiskyShop/Entity/Products.java=UTF-8
 encoding//src/main/java/WhiskyShop/Entity/Users.java=UTF-8
 encoding//src/main/java/WhiskyShop/Service/Admin/IBrandsAdmin.java=UTF-8
+encoding//src/main/java/WhiskyShop/Service/User/BillServiceImpl.java=UTF-8
 encoding//src/main/java/WhiskyShop/Service/User/PaginateServiceImpl.java=UTF-8

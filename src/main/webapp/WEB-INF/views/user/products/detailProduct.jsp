@@ -15,7 +15,7 @@
 
 									<li data-thumb="images/s1.jpg"
 										style="list-style-position: inside; border: 1px solid black;"><img
-										src="<c:url value="/assets/user/images/products/${item.img}" />"
+										src="<c:url value="/assets/products/${item.img}"/>"
 										style="width: 100%" /></li>
 
 								</ul>
@@ -25,7 +25,17 @@
 						<div class="cont1 span_2_of_a1 simpleCart_shelfItem">
 							<h1 style="font-weight: bold">${item.name}</h1>
 							<p class="availability">
-								Availability: <span class="color">In stock</span>
+								Availability: <span class="color">
+								
+								<c:if test="${item.quanty <= 0 }">
+								Out of stock
+								</c:if>
+								<c:if test="${item.quanty > 0 }">
+								In stock
+								</c:if>
+								
+								
+								</span>
 							</p>
 							<div class="price_single">
 								<!-- giảm giá: <span class="reducedfrom">$140.00</span> -->
@@ -59,7 +69,13 @@
 							<h2 class="quick">Đôi nét về rượu:</h2>
 							<p class="quick_desc">${item.title}</p>
 
-
+							<c:if test="${item.quanty <= 0 }">
+									<a href="#"
+								class="btn btn-primary btn-normal btn-inline btn_form button item_add item_1 disabled"
+								target="_self">Out of Stock</a>
+							</c:if>
+							
+							<c:if test="${item.quanty >0 }">
 							<div class="quantity_box">
 								<ul class="product-qty">
 									<span>Quantity:</span>
@@ -77,6 +93,7 @@
 							<a href="<c:url value="/AddCart/${item.id}" />"
 								class="btn btn-primary btn-normal btn-inline btn_form button item_add item_1"
 								target="_self">Add to cart</a>
+								</c:if>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -117,7 +134,7 @@
 								<div class="col-sm-3">
 									<div class="card">
 										<img
-											src="<c:url value="/assets/user/images/products/${item.img}" />"
+										src="<c:url value="/assets/products/${item.img}" />"
 											alt="Denim Jeans" style="width: 100%">
 										<h4><a href="<c:url value="/detail/${item.id}"/>">${item.name }</a></h4>
 										<p class="price">

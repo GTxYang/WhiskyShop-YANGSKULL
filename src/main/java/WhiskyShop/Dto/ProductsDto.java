@@ -21,9 +21,11 @@ public class ProductsDto {
 	private int idBrand;
 	private String nameCate;
 	private int idCate;
+	private int quanty;
+	
 	public ProductsDto(long id, int volumn, int ml, String origin, String name, double price, int sale, String title,
 			boolean highlight, boolean new_product, String detail, Date created_at, Date updated_at, String img,
-			String nameBrand, int idBrand, String nameCate, int idCate) {
+			String nameBrand, int idBrand, String nameCate, int idCate,int quanty) {
 		super();
 		this.id = id;
 		this.volumn = volumn;
@@ -43,9 +45,17 @@ public class ProductsDto {
 		this.idBrand = idBrand;
 		this.nameCate = nameCate;
 		this.idCate = idCate;
+		this.quanty = quanty;
 	}
 	public ProductsDto() {
 		super();
+	}
+	
+	public int getQuanty() {
+		return quanty;
+	}
+	public void setQuanty(int quanty) {
+		this.quanty = quanty;
 	}
 	public long getId() {
 		return id;

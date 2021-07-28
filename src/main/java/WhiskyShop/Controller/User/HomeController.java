@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,6 +14,7 @@ import com.opensymphony.sitemesh.webapp.decorator.BaseWebAppDecorator;
 
 import WhiskyShop.Dao.SlidesDao;
 import WhiskyShop.Dto.CartDto;
+
 import WhiskyShop.Service.User.HomeServiceImpl;
 
 @Controller
@@ -21,6 +23,7 @@ public class HomeController extends BaseController {
 
 	@RequestMapping(value = { "/", "/trang-chu" })
 	public ModelAndView Index(HttpSession session) {
+		
 		HashMap<Long, CartDto> cart = (HashMap<Long, CartDto>)session.getAttribute("Cart");
 		if(cart == null)
 		{

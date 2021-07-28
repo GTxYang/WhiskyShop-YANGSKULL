@@ -37,7 +37,8 @@
 								href="<c:url value="/DeleteCart/${item.value.product.id}" />"
 								class="close1 "></a></td>
 							<td><img width="100"
-								src=<c:url value="assets/user/images/products/${item.value.product.img}"/>
+							src="<c:url value="/assets/products/${item.value.product.img}"/>"
+								
 								alt=""></td>
 							<td>${item.value.product.name}<br>${item.value.product.ml}
 								ml<br>${item.value.product.volumn} %

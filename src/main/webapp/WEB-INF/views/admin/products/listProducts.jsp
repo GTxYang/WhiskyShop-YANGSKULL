@@ -47,6 +47,7 @@
 							<th>Product name</th>
 							<th>Brand</th>
 							<th>Category</th>
+							<th>Quanty</th>
 							<th>Imgae</th>
 							<th>Actions</th>
 
@@ -61,9 +62,9 @@
 								<td><span class="text-ellipsis">${item.name }</span></td>
 								<td><span class="text-ellipsis">${item.nameBrand }</span></td>
 								<td><span class="text-ellipsis">${item.nameCate }</span></td>
-
+								<td>${item.quanty}</td>
 								<td style=" width: 10%;"><span class="text-ellipsis"> <img
-										src="<c:url value="/assets/user/images/products/${item.img}" />"
+										src="<c:url value="/assets/products/${item.img}" />"
 										style="width: 100%" />
 
 								</span></td> 
@@ -82,10 +83,10 @@
 								</a>
 								
 								 <a onclick="return confirm('Bạn có thực sự muốn xóa không?');"
-									href="deleteRole?id=${item.id}"> <i
-										style="font-size: 25px;"
+									href="deleteProduct?id=${item.id}">
+									<i style="font-size: 25px;"
 										class="fa fa-times fa-lg text-danger text"> </i>
-								</a>
+								 </a>
 								
 							
 								

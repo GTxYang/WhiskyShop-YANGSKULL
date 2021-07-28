@@ -21,6 +21,15 @@ public class ProductsDao extends BaseDAO {
 		return list;
 	}
 
+	public List<Products> getList_WarningQuanty()
+	{
+		List<Products> list = new ArrayList<Products>();
+		String sql ="SELECT * FROM `products` WHERE quanty <= 10";
+		list = _jdbcTemplate.query(sql, new MapperProducts());
+		return list;
+	}
+	
+	
 	// Lấy sản phẩm mới, lấy ngày mới nhất mà chỉ lấy 8 cái
 	public List<Products> getDataNewProducts() {
 		List<Products> list = new ArrayList<Products>();
@@ -53,6 +62,21 @@ public class ProductsDao extends BaseDAO {
 		} catch (Exception e) {
 			return list = null;
 		}
+	}
+
+	// Lấy số lượng hiện tại của sản phẩm
+
+
+//Dùng để update số lượng sản phẩm , mỗi lần có ng mua
+	public void updateQuanty(long id, int newQuanty) {
+		StringBuffer varname1 = new StringBuffer();
+		varname1.append("UPDATE ");
+		varname1.append("    `products` ");
+		varname1.append("SET ");
+		varname1.append("    `quanty` =  " + newQuanty);
+		varname1.append(" WHERE ");
+		varname1.append("   `id` = " + id);
+		_jdbcTemplate.update(varname1.toString());
 	}
 
 	public List<Products> GetDataProductsPaginateByID(int id, int start, int end) {
@@ -89,7 +113,87 @@ public class ProductsDao extends BaseDAO {
 		}
 	}
 
+	public Products GetDetailProduct(int id) {
+		List<Products> list = new ArrayList<Products>();
+		String sql = "SELECT * FROM `products` WHERE id = " + id;
+		list = _jdbcTemplate.query(sql, new MapperProducts());
+		return list.get(0);
+	}
 
+	public int UpdateProduct(Products product) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("UPDATE ");
+		sql.append("    `products` ");
+		sql.append("SET ");
+		sql.append("    `id_category` = '" + product.getId_category() + "', ");
+		sql.append("    `id_brand` = '" + product.getId_brand() + "', ");
+		sql.append("    `volumn` = '" + product.getVolumn() + "', ");
+		sql.append("    `ml` = '" + product.getMl() + "', ");
+		sql.append("    `origin` = '" + product.getOrigin() + "', ");
+		sql.append("    `name` = '" + product.getName() + "', ");
+		sql.append("    `price` = '" + product.getPrice() + "', ");
+		sql.append("    `sale` = '" + product.getSale() + "', ");
+		sql.append("    `quanty` = '" + product.getQuanty() + "', ");
+		sql.append("    `title` = '" + product.getTitle() + "', ");
+		sql.append("    `highlight` = " + product.isHighlight() + ", ");
+		sql.append("    `new_product` = " + product.isNew_product() + ", ");
+		sql.append("    `detail` = '" + product.getDetail() + "', ");
+//		sql.append("    `created_at` = '"+product.getCreated_at()+"', ");
+		sql.append("    `updated_at` = '" + product.getUpdated_at() + "', ");
+		sql.append("    `img` = '" + product.getImg() + "' ");
+		sql.append("WHERE ");
+		sql.append("      `id` = '" + product.getId() + "'");
+		int update = _jdbcTemplate.update(sql.toString());
+		return update;
+	}
+
+	public int DeleteProduct(int id) {
+		String sql = "DELETE FROM `products` WHERE id =" + id;
+		return _jdbcTemplate.update(sql);
+	}
+
+	public int AddProduct(Products product) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("INSERT INTO `products`( ");
+		sql.append("    `id_category`, ");
+		sql.append("    `id_brand`, ");
+		sql.append("    `volumn`, ");
+		sql.append("    `ml`, ");
+		sql.append("    `origin`, ");
+		sql.append("    `name`, ");
+		sql.append("    `price`, ");
+		sql.append("    `sale`, ");
+		sql.append("    `title`, ");
+		sql.append("    `highlight`, ");
+		sql.append("    `new_product`, ");
+		sql.append("    `detail`, ");
+		sql.append("    `created_at`, ");
+		sql.append("    `updated_at`, ");
+		sql.append("    `img` ,");
+		sql.append("    `quanty` ");
+		sql.append(") ");
+		sql.append("VALUES( ");
+		sql.append("    '" + product.getId_category() + "', ");
+		sql.append("    '" + product.getId_brand() + "', ");
+		sql.append("    '" + product.getVolumn() + "', ");
+		sql.append("    '" + product.getMl() + "', ");
+		sql.append("    '" + product.getOrigin() + "', ");
+		sql.append("    '" + product.getName() + "', ");
+		sql.append("    '" + product.getPrice() + "', ");
+		sql.append("    '" + product.getSale() + "', ");
+		sql.append("    '" + product.getTitle() + "', ");
+		sql.append("    " + product.isHighlight() + ", ");
+		sql.append("    " + product.isNew_product() + ", ");
+		sql.append("    '" + product.getDetail() + "', ");
+		sql.append("    '" + product.getCreated_at() + "', ");
+		sql.append("    '" + product.getUpdated_at() + "', ");
+		sql.append("    '" + product.getImg() + "' ,");
+		sql.append("    '" + product.getQuanty() + "' ");
+		sql.append(")");
+		int add = _jdbcTemplate.update(sql.toString());
+		return add;
+
+	}
 
 	///// PRODUCT DTO JOIN VỚI BRAND VÀ CATE NAME
 	private StringBuffer sqlStringProducts() {
@@ -109,40 +213,38 @@ public class ProductsDao extends BaseDAO {
 		varname1.append("p.created_at, ");
 		varname1.append("p.updated_at, ");
 		varname1.append("p.img, ");
+		varname1.append("p.quanty, ");
 		varname1.append("b.name as nameBrand, ");
 		varname1.append("b.id as idBrand, ");
 		varname1.append("c.name as nameCate, ");
 		varname1.append("c.id as idCate ");
+
 		varname1.append("FROM `products` as p INNER JOIN brand as b on p.id_brand = b.id ");
 		varname1.append("INNER JOIN category as c on p.id_category = c.id ");
 		return varname1;
 	}
-	
-	public List<ProductsDto> getProductsDTO()
-	{
+
+	public List<ProductsDto> getProductsDTO() {
 		List<ProductsDto> list = new ArrayList<ProductsDto>();
 		String sql = sqlStringProducts().toString();
 		list = _jdbcTemplate.query(sql, new ProductsDtoMapper());
-		return list; 
+		return list;
 	}
-	
-	
-	private String sqlDetailProductDto(long id)
-	{
+
+	private String sqlDetailProductDto(long id) {
 		StringBuffer sql = sqlStringProducts();
-		sql.append("where p.id = "+ id);
+		sql.append("where p.id = " + id);
 		return sql.toString();
 	}
-	
-	public List<ProductsDto> GetDataDeatilProduct(long id){
+
+	public List<ProductsDto> GetDataDeatilProduct(long id) {
 		List<ProductsDto> list = new ArrayList<ProductsDto>();
 		String sql = sqlDetailProductDto(id);
 		list = _jdbcTemplate.query(sql, new ProductsDtoMapper());
 		return list;
 	}
-	
-	
-	public ProductsDto FindProductByID(long id){
+
+	public ProductsDto FindProductByID(long id) {
 		String sql = sqlDetailProductDto(id);
 		ProductsDto product = _jdbcTemplate.queryForObject(sql, new ProductsDtoMapper());
 		return product;
@@ -151,20 +253,18 @@ public class ProductsDao extends BaseDAO {
 	public List<Products> SearchProductByName(String name) {
 		List<Products> list = new ArrayList<Products>();
 		try {
-			String sql = "SELECT * FROM `products` WHERE name like '%"+ name +"%'";
+			String sql = "SELECT * FROM `products` WHERE name like '%" + name + "%'";
 			list = _jdbcTemplate.query(sql, new MapperProducts());
 			return list;
 		} catch (Exception e) {
 			return list = null;
 		}
 	}
-	
-	
 
 	public List<Products> GetDataProductsPaginateBySeachName(String name, int start, int end) {
 		List<Products> list = new ArrayList<Products>();
 		try {
-			String sql = "SELECT * FROM `products` WHERE name like '%"+ name +"%' limit " + start+ " , "+ end    ;
+			String sql = "SELECT * FROM `products` WHERE name like '%" + name + "%' limit " + start + " , " + end;
 			list = _jdbcTemplate.query(sql, new MapperProducts());
 			return list;
 		} catch (Exception e) {

@@ -12,6 +12,7 @@
 		<spring.version>5.2.2.RELEASE</spring.version>
 		<spring.security.version>5.2.2.RELEASE</spring.security.version>
 		<spring.securitytaglib.version>5.2.2.RELEASE</spring.securitytaglib.version>
+		<spring-tx.version>5.2.2.RELEASE</spring-tx.version>
 	</properties>
 
 	<dependencies>
@@ -40,12 +41,22 @@
 			<version>${spring.version}</version>
 		</dependency>
 
+		<!-- Spring tx - Quản lý transaciton cho sql -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring-tx.version}</version>
+		</dependency>
+
 		<!-- string-JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
+
+
 
 		<!-- MySQL -->
 		<dependency>

@@ -28,6 +28,7 @@ public class ProductsDtoMapper implements RowMapper<ProductsDto> {
 		products.setIdBrand(rs.getInt("idbrand"));
 		products.setNameCate(rs.getString("namecate"));
 		products.setIdCate(rs.getInt("idcate"));
+		products.setQuanty(rs.getInt("quanty"));
 		return products;
 	}
 	

@@ -25,6 +25,7 @@ public class MapperProducts implements RowMapper<Products>{
 		product.setCreated_at(rs.getDate("created_at"));
 		product.setUpdated_at(rs.getDate("updated_at"));
 		product.setImg(rs.getString("img"));
+		product.setQuanty(rs.getInt("quanty"));
 		return product;
 	}
 

@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.naming.Binding;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,10 @@ import WhiskyShop.Service.Admin.ProductsAdminServiceImpl;
 @RequestMapping("/admin/")
 public class ProductsController extends BaseAdminController{
 	
+	
+	@Autowired
+	ServletContext context;
+	
 	@Autowired
 	ProductsAdminServiceImpl productsService;
 	
@@ -58,11 +63,49 @@ public class ProductsController extends BaseAdminController{
 	@GetMapping("Products/{id}")
 	public ModelAndView ViewDetailProductsDTO(@PathVariable("id") int id,ModelMap model)
 	{
-		_mvShare.addObject("detailProductDTO",productsService.getDetailProductDTO(id));
+		_mvShare.addObject("product",productsService.getDetailProduct(id));
 		_mvShare.setViewName("admin/products/detailProducts");
 		return _mvShare;
 	}
 	
+	@PostMapping("editProduct")
+	public String Post_UpdateProduct(@ModelAttribute("product") @Valid Products product,BindingResult rs, ModelMap model,MultipartHttpServletRequest request)
+	{
+		if(rs.hasErrors())
+		{
+			return "admin/products/detailProducts";
+		}else {
+			
+			String path_save = context.getRealPath("/assets/products/");
+			Iterator<String> listNames = request.getFileNames();
+			MultipartFile mpf = request.getFile(listNames.next());	
+			String name_file = mpf.getOriginalFilename();
+			
+			File file_save = new File(path_save + name_file);
+			try {
+				mpf.transferTo(file_save);
+				
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		      product.setImg(name_file);
+		      int update= productsService.UpdateProduct(product);
+		      if(update > 0)
+		      {
+		    	  model.addAttribute("status","thành công");
+		    	  return "redirect:Products";
+		    	  
+		      }else {
+		    	  model.addAttribute("error"," thất bại");
+		    	  return "admin/products/detailProducts";
+		      }
+		}
+		
+	}
 	//Lấy list Cate có thể tái sử dụng
 	@ModelAttribute("listCate")
 	public List<Categorys> getCategorys_List()
@@ -81,14 +124,13 @@ public class ProductsController extends BaseAdminController{
 	}
 	
 	@ModelAttribute("listTrueFalse")
-	public Map<Integer,String>getListTrueFasle()
-	{
-		Map<Integer,String> list = new HashMap<>();
-		list.put(0, "False");
-		list.put(1, "True");
-		return list;
-		
+	public Map<String, String> listEnable() {
+		Map<String, String> enbale = new HashMap<String, String>();
+		enbale.put("0", "0");
+		enbale.put("1", "1");
+		return enbale;
 	}
+
 	
 	@GetMapping("addProducts")
 	public ModelAndView addProduct()
@@ -97,9 +139,7 @@ public class ProductsController extends BaseAdminController{
 		_mvShare.setViewName("admin/products/addProducts");
 		return _mvShare;
 	}
-	
-	@Autowired
-	ServletContext context;
+
 	
 	@PostMapping("addProducts")
 	public String Action_AddProduct(@ModelAttribute("product") @Valid Products product,BindingResult rs, ModelMap model,MultipartHttpServletRequest request)
@@ -112,13 +152,13 @@ public class ProductsController extends BaseAdminController{
 			
 			String path_save = context.getRealPath("/assets/products/");
 			Iterator<String> listNames = request.getFileNames();
-			MultipartFile mpf = request.getFile(listNames.next());
+			MultipartFile mpf = request.getFile(listNames.next());	
 			String name_file = mpf.getOriginalFilename();
 			
 			File file_save = new File(path_save + name_file);
 			try {
 				mpf.transferTo(file_save);
-				model.addAttribute("status","Thêm thành công");
+				
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -127,15 +167,32 @@ public class ProductsController extends BaseAdminController{
 				e.printStackTrace();
 			}
 		      product.setImg(name_file);
-		      
-		      
-		      
-		      
-		      return "redirect:Products";
+		      int add= productsService.AddProduct(product);
+		      if(add > 0)
+		      {
+		    	  model.addAttribute("status","thành công");
+		    	  return "redirect:Products";
+		    	  
+		      }else {
+		    	  model.addAttribute("error"," thất bại");
+		    	  return "admin/products/addProducts";
+		      }
 		}
-		
-			}
+	}
 	
+	@GetMapping("deleteProduct")
+	public ModelAndView DeleteRole(@RequestParam("id") int id,ModelMap model,HttpServletRequest request)
+	{
+		int delete = productsService.DeleteProduct(id);
+		if(delete > 0)
+		{
+			model.addAttribute("status","Xóa product thành công");
+		}else {
+			 model.addAttribute("error","Xóa product thất bại");
+		}
+		_mvShare.setViewName("redirect:Products");
+		return _mvShare;
+	}
 	
 	
 }

@@ -59,7 +59,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="<c:url value="/assets/admin/js/morris.js "/>"></script>
 
 
-
+<script src="<c:url value="/ckeditor/ckeditor.js "/>"></script>
 
 
 
@@ -71,6 +71,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="shortcut icon"
 	href="<c:url value="/assets/user/images/favicon.ico" />">
 
+
+
+
+<style>
+
+.my-custom-scrollbar {
+position: relative;
+height: 477px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+</style>
 <decorator:head />
 </head>
 

@@ -33,7 +33,8 @@ public class CheckoutController extends BaseController {
 	@Autowired
 	BillServiceImpl billService;
 	 
-	
+	long millis=System.currentTimeMillis();  
+	java.sql.Date date=new java.sql.Date(millis); 
 	
 	@RequestMapping("/checkout")
 	public ModelAndView Index(ModelMap model) {
@@ -45,13 +46,7 @@ public class CheckoutController extends BaseController {
 			Users user = accountService.FindUserByUsername(username);
 			
 			bill.setId_user(user.getId());
-			
-			long millis=System.currentTimeMillis();  
-			java.sql.Date date=new java.sql.Date(millis); 
-			bill.setDate_order(date);
-			
-			
-			
+	
 			model.addAttribute("userInFo",user);
 			model.addAttribute("bill",bill);
 		}
@@ -68,7 +63,9 @@ public class CheckoutController extends BaseController {
 	{
 		
 		double totalbill = (double) session.getAttribute("TotalPriceCart");
+		bill.setDate_order(date);
 		bill.setTotal_bill(totalbill);
+		
 		int rs = billService.AddBill(bill);
 		if(rs > 0)
 		{

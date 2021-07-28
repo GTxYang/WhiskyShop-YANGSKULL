@@ -113,12 +113,12 @@ public class AccountController extends BaseController {
 		return "user/account/register";
 	}
 
-	@GetMapping("/404")
-	public ModelAndView error()
-	{
-		_mvShare.setViewName("user/404");
-		return _mvShare;
-	}
+//	@GetMapping("/404")
+//	public ModelAndView error()
+//	{
+//		_mvShare.setViewName("user/404");
+//		return _mvShare;
+//	}
 	
 	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
 			Pattern.CASE_INSENSITIVE);

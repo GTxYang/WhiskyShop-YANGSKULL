@@ -1,9 +1,14 @@
 package WhiskyShop.Dao;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import WhiskyShop.Entity.Bill;
 import WhiskyShop.Entity.BillDetails;
+import WhiskyShop.Entity.Brands;
 
 @Repository
 public class BillDao extends BaseDAO {
@@ -60,6 +65,24 @@ public class BillDao extends BaseDAO {
 		sql.append(")");
 		
 		_jdbcTemplate.update(sql.toString());
+	}
+	
+	public double getToTalBillOrder_PerDay(Date date)
+	{
+		
+		String sql = "SELECT SUM(total_bill) AS TotalItemsOrdered FROM Bill where date_order = '" +date+ "'";
+		//String sql = "SELECT SUM(total_bill) AS TotalItemsOrdered FROM Bill where date_order = ? ";
+		try {
+			return _jdbcTemplate.queryForObject(sql, Double.class);
+		}catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	public int getCountBillToday(Date date)
+	{
+		String sql = "SELECT COUNT(*) FROM bill where date_order = '"+date+"'";
+		return _jdbcTemplate.queryForObject(sql,Integer.class);
 	}
 
 }

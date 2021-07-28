@@ -27,7 +27,7 @@ public class Products  {
 	@NotBlank(message = "Không được để trống origin")
 	private  String origin ;
 	
-	@NotBlank(message = "Không được để trống origin")
+	@NotBlank(message = "Không được để trống name")
 	private  String name ;
 	
 	@NotNull(message = "Không được để trống price")
@@ -44,10 +44,20 @@ public class Products  {
 	@NotBlank(message = "Không được để trống detail")
 	private  String detail ;
 	
+	private int quanty;
+	
+	
 	private  Date created_at ;
 	private  Date updated_at ;
 	private  String img;
 	
+	
+	public int getQuanty() {
+		return quanty;
+	}
+	public void setQuanty(int quanty) {
+		this.quanty = quanty;
+	}
 
 	public Products() {
 		super();

@@ -65,7 +65,7 @@
 		<div class="col-lg-6">
 			<div class="table-agile-info">
 				<div class="panel panel-default">
-					<div class="panel-heading">Các Role của yang0310</div>
+					<div class="panel-heading">Các Role của ...</div>
 					<div>
 						<table class="table" ui-jq="footable"
 							ui-options='{

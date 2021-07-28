@@ -68,7 +68,7 @@
 							<div class="col-sm-4">
 								<div class="card">
 									<img
-										src="<c:url value="/assets/user/images/products/${item.img}" />"
+										src="<c:url value="/assets/products/${item.img}" />"
 										alt="Denim Jeans" style="width: 100%">
 									<h4><a href="<c:url value="/detail/${item.id}"/>">${item.name }</a></h4>
 									<p class="price">
@@ -76,9 +76,18 @@
 											value="${item.price}" />
 										VNĐ
 									</p>
-									<p>
-										<button>Add to Cart</button>
-									</p>
+										<c:if test="${item.quanty == 0 }">
+										<p>
+											<button style="background-color: gray;" disabled>Out Of Stock</button>
+										</p>
+										</c:if>
+										<c:if test="${item.quanty > 0 }">
+										<form method="get" action="AddCart/${item.id}">
+											<p>
+												<button>Add to Cart</button>
+											</p>
+										</form>
+									</c:if>
 								</div>
 							</div>
 							<c:if test="${(index.index+1) % 3 == 0 }">

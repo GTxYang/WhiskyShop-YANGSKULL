@@ -11,10 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ErrorController extends BaseController{
 	
-	@GetMapping("/404")
+	@GetMapping("/404tt")
     public ModelAndView renderErrorPage(HttpServletRequest httpRequest) {
         
-		
         String errorMsg = "";
         int httpErrorCode = getErrorCode(httpRequest);
 

@@ -116,7 +116,9 @@ form.example::after {
 							</span>
 
 							<div class="dropdownUser-content">
-								<a href="<c:url value="/userinfo"/>">User Information</a>
+								<a
+									href="<c:url value="/userinfo/${pageContext.request.userPrincipal.name}"/>">User
+									Information</a>
 								<sec:authorize access="hasRole('ROLE_ADMIN')">
 									<a href="<c:url value="/admin"/>">Admin Page</a>
 								</sec:authorize>
@@ -141,19 +143,34 @@ form.example::after {
 				<!-- CHƯA ĐĂNG NHẬP -->
 				<sec:authorize access="!isAuthenticated()">
 					<div class="lang_list">
+						<div class="dropdownUser">
+							<span
+								style="display: inline;  width: 100px; height: 100px; padding: 5px;">
+								<a style="color: white" href="${pageContext.request.requestURL}?language=en"><span>EN</span></a>
+							</span> <span
+								style="display: inline;  width: 100px; height: 100px; padding: 5px;">
+								<a style="color: white" href="${pageContext.request.requestURL}?language=vi"><span>VI</span></a>
+							</span>
+						</div>
+					</div>
+
+					<div class="lang_list">
 						<div class="dropdownUser" style="margin-right: 20px">
 							<span style="display: block"> <a style="color: white"
 								href="<c:url value="/Login"/>"> <i
-									class="fas fa-sign-out-alt"></i><span> Login</span></a>
+									class="fas fa-sign-out-alt"></i><span> <spring:message
+											code="Login" text="default text" /></span></a>
 							</span>
 
 						</div>
 
-					</div> 
+					</div>
 					<div class="lang_list">
 						<div class="dropdownUser" style="margin-right: 20px">
 							<span style="display: block"> <a style="color: white"
-								href="<c:url value="/Register"/>"> <i class="fas fa-user-plus"></i><span> Register</span></a>
+								href="<c:url value="/Register"/>"> <i
+									class="fas fa-user-plus"></i><span> <spring:message
+											code="Register" text="default text" /></span></a>
 							</span>
 
 						</div>
@@ -164,9 +181,7 @@ form.example::after {
 
 
 
-				<!-- start search-->
 
-				<!----//search-scripts---->
 				<div class="clearfix"></div>
 
 			</div>
@@ -186,6 +201,7 @@ form.example::after {
 			<div class="menu" style="padding-right: 230px">
 				<ul class="megamenu skyblue">
 					<c:forEach var="item" items="${menus}" varStatus="index">
+
 						<c:if test="${index.first}">
 							<li class="active grid">
 						</c:if>
@@ -193,8 +209,8 @@ form.example::after {
 							<li class="">
 						</c:if>
 
-						<a class="color4" href="<c:url value="${item.url}"/>">
-							${item.name}</a>
+						<a class="color4" href="<c:url value="${item.url}"/>"> <spring:message
+								code="${item.name}" text="default text" /></a>
 					</c:forEach>
 					</li>
 
@@ -203,7 +219,8 @@ form.example::after {
 			</div>
 
 
-			<form class="example" action="san-pham" style="margin: auto; max-width: 700px">
+			<form class="example" action="san-pham"
+				style="margin: auto; max-width: 700px">
 				<input type="text" placeholder="Search.." name="search">
 				<button type="submit">
 					<i class="fa fa-search"></i>

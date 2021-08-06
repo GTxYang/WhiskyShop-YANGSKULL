@@ -8,7 +8,7 @@ import org.w3c.dom.html.HTMLTableRowElement;
 
 public class BrandsDtoMapper implements RowMapper<BrandsDto>{
 
-	@Override
+	
 	public BrandsDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BrandsDto brand = new BrandsDto();
 		brand.setIdbrand(rs.getInt("idbrand"));

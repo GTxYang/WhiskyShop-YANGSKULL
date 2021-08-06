@@ -13,13 +13,13 @@ public class RoleDao extends BaseDAO {
 	
 	public List<Role> GetAllDataRole()
 	{
-		List<Role> list = new ArrayList<>();
+		List<Role> list = new ArrayList<Role>();
 		String sql = "SELECT * FROM role";
 		list = _jdbcTemplate.query(sql, new MapperRole());
 		return list;
 	}
 	
-	public int InsertRole(String name)
+	public int InsertRole(String name) 
 	{
 		String sql = "INSERT INTO `role`(`name`) VALUES ( '"+name+"' )";
 		int insert = _jdbcTemplate.update(sql);
@@ -42,7 +42,7 @@ public class RoleDao extends BaseDAO {
 	
 	public List<Role> FindRoleByID(int id)
 	{
-		List<Role> list = new ArrayList<>();
+		List<Role> list = new ArrayList<Role>();
 		String sql  = "SELECT * FROM `role` WHERE id = " + id;
 		list = _jdbcTemplate.query(sql, new MapperRole());
 		return list ;

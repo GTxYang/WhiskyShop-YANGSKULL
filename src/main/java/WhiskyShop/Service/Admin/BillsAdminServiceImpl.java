@@ -17,12 +17,12 @@ public class BillsAdminServiceImpl implements IBills{
 	long millis=System.currentTimeMillis();  
 	java.sql.Date today=new java.sql.Date(millis);  
 	
-	@Override
+	
 	public double getToTalBillOrder_PerDay(Date date) {
 		return billDao.getToTalBillOrder_PerDay(date);
 	}
 
-	@Override
+	
 	public int getCountBillToday(Date date) {
 		return billDao.getCountBillToday(date);
 	}

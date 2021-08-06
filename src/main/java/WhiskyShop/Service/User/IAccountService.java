@@ -11,5 +11,7 @@ public interface IAccountService {
 	public int createAccount(Users user);
 	
 	public Users FindUserByUsername(String username);
+	
+	public int updateUser(Users user);
 
 }

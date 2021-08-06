@@ -14,7 +14,7 @@ public class UsersServiceImpl implements IUsers {
 	@Autowired
 	AccountDao usersDao;
 	
-	@Override
+	
 	public List<Users> ListUsers() {
 		return usersDao.ListUsers();
 	}
@@ -24,7 +24,7 @@ public class UsersServiceImpl implements IUsers {
 		return usersDao.createAccount(user);
 	}
 
-	@Override
+	
 	public Users FindUserByID(int id) {
 		return usersDao.FindUserByID(id);
 	}
@@ -39,7 +39,7 @@ public class UsersServiceImpl implements IUsers {
 		return usersDao.DeleteUserByID(id);
 	}
 
-	@Override
+	
 	public int BlockUser(int id) {
 		return usersDao.BlockUser(id);
 	}

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -62,7 +65,7 @@ public class CheckoutController extends BaseController {
 	public String CheckOutBill(HttpServletRequest request, HttpSession session, @ModelAttribute("bill") Bill bill , ModelMap model)
 	{
 		
-		double totalbill = (double) session.getAttribute("TotalPriceCart");
+		double totalbill = (Double)session.getAttribute("TotalPriceCart");
 		bill.setDate_order(date);
 		bill.setTotal_bill(totalbill);
 		
@@ -73,6 +76,20 @@ public class CheckoutController extends BaseController {
 			billService.AddBillDeatils(cart);
 			session.removeAttribute("Cart");
 			model.addAttribute("status","Bạn đã đặt hàng thành công, YangSkull sẽ giao hàng cho bạn sớm nhất có thể");
+			
+			  ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("MailContext.xml");
+			    MailSender mailSender = (MailSender) context.getBean("mailSender2");
+			    System.out.println("Sending text...");
+			    SimpleMailMessage message = new SimpleMailMessage();
+			    message.setFrom("giagt1312@gmail.com");
+			    message.setTo("howl1542@gmail.com");
+			    message.setSubject("YANGSKULL - ĐẶT HÀNG THÀNH CÔNG");
+			    message.setText("Cảm ơn bạn đã tin tưởng chúng tôi, chúng tôi đã nhận được đơn hàng của bạn ");
+			    // sending message
+			    mailSender.send(message);
+			    System.out.println("Sending text done!");
+			    context.close();
+			
 		}
 		model.addAttribute("menus", _homeService.getDataMenus());
 		return "user/cart/checkoutSuccessful";

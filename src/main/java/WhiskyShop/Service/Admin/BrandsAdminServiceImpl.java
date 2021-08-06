@@ -22,31 +22,31 @@ public class BrandsAdminServiceImpl implements IBrandsAdmin {
 	}
 
 
-	@Override
+	
 	public List<BrandsDto> getListBrandDTO() {
 		return brandDao.getListBrandDTO();
 	}
 
 
-	@Override
+	
 	public int AddBrand(Brands brand) {
 		return brandDao.AddBrand(brand);
 	}
 
 
-	@Override
+
 	public Brands getBrandByID(int id) {
 		return brandDao.getBrandByID(id);
 	}
 
 
-	@Override
+	
 	public int UpdateBrand(Brands brand) {
 		return brandDao.UpdateBrand(brand);
 	}
 
 
-	@Override
+	
 	public int DeleteBrand(int id) {
 		return brandDao.DeleteBrand(id);
 	}

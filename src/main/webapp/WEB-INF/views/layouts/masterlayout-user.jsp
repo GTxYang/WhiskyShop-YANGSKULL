@@ -5,9 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="/WEB-INF/views/layouts/user/taglib.jsp"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-
+<meta charset="UTF-8">
 <title>Rượu nhập khẩu - YANGSKULL</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -49,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="shortcut icon"
 	href="<c:url value="/assets/user/images/favicon.ico" />">
-<%@include file="/WEB-INF/views/layouts/user/taglib.jsp"%>
+
 
 
 <script>

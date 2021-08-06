@@ -14,7 +14,7 @@ public class RoleServiceImpl implements IRole{
 	@Autowired
 	RoleDao roleDao;
 	
-	@Override
+	
 	public List<Role> GetAllDataRole() {
 		return roleDao.GetAllDataRole();
 	}
@@ -23,17 +23,17 @@ public class RoleServiceImpl implements IRole{
 		return roleDao.InsertRole(name);
 	}
 
-	@Override
+	
 	public int UpdateRole(int id,String name) {
 		return roleDao.UpdateRole(id, name);
 	}
 
-	@Override
+	
 	public int DeleteRole(int id) {
 		return roleDao.DeleteRole(id);
 	}
 
-	@Override
+	
 	public Role FindRoleByID(int id) {
 		return roleDao.FindRoleByID(id).get(0);
 	}

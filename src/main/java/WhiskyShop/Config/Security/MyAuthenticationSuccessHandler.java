@@ -21,7 +21,7 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-	@Override
+	
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException {
 
@@ -43,7 +43,7 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 
 	protected String determineTargetUrl(final Authentication authentication) {
 
-		Map<String, String> roleTargetUrlMap = new HashMap<>();
+		Map<String, String> roleTargetUrlMap = new HashMap<String, String>();
 		roleTargetUrlMap.put("ROLE_USER", "/");
 		roleTargetUrlMap.put("ROLE_ADMIN", "/admin/");
 

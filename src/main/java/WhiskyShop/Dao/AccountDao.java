@@ -89,6 +89,22 @@ public class AccountDao extends BaseDAO {
 	}
 	
 	
+	public int updateUser(Users user)
+	{
+		StringBuffer sql = new StringBuffer();
+		sql.append("UPDATE `users` ");
+		sql.append("SET ");
+		sql.append("`email`='"+user.getEmail()+"', ");
+		sql.append("`first_name`='"+user.getFirst_name()+"', ");
+		sql.append("`last_name`='"+user.getLast_name()+"', ");
+		sql.append("`phone`='"+user.getPhone()+"', ");
+		sql.append("`address`='"+user.getAddress()+"'  ");
+		sql.append("WHERE ");
+		sql.append("`id`="+ user.getId()+"");
+		int update = _jdbcTemplate.update(sql.toString());
+		return update;
+	}
+	
 	public int BlockUser(int id)
 	{
 		StringBuffer  sql = new StringBuffer();

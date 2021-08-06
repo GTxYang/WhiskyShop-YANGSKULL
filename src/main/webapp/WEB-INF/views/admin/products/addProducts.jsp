@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="<c:url value="/ckeditor/ckeditor.js "/>"></script>
+<script src="<c:url value="/ckfinder/ckfinder.js "/>"></script>
 
 </head>
 <body>
@@ -46,13 +47,13 @@
 										</div>
 									</div>
 								</div>
-<div class="form-group">
+								<div class="form-group">
 									<label class="col-sm-3 control-label col-lg-3">Quanty</label>
 									<div class="col-lg-6">
 										<div class="input-group m-bot15" style="margin-bottom: 7px;">
 											<span class="input-group-addon btn-white"><i
 												class="fa fa-user"></i></span>
-											<form:input path="quanty" type="text"  class="form-control" />
+											<form:input path="quanty" type="text" class="form-control" />
 											<form:errors path="quanty" style="color:red !important" />
 
 										</div>
@@ -155,8 +156,7 @@
 									<div class="col-lg-6">
 										<div class="input-group m-bot15" style="margin-bottom: 7px;">
 											<span class="input-group-addon btn-white"><i
-												class="fa fa-user"></i></span> <input type="file"
-												class="form-control" name="user-file" multiple="multiple" />
+												class="fa fa-user"></i></span> <input type="file" class="form-control" name="user-file" multiple="multiple" />
 
 											<span style="color: red !important">${error }</span>
 										</div>
@@ -260,7 +260,8 @@
 	</div>
 
 	<script>
-		CKEDITOR.replace('detail');
+		var editor = CKEDITOR.replace('detail');
+		CKFinder.setupCKEditor(editor, '<c:url value="/ckfinder/"/>');
 	</script>
 </body>
 </html>

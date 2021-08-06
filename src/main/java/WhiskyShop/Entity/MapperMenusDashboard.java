@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 
 public class MapperMenusDashboard implements RowMapper<MenusDashboard> {
 
-	@Override
+	
 	public MenusDashboard mapRow(ResultSet rs, int rowNum) throws SQLException {
 		MenusDashboard menu = new MenusDashboard();
 		menu.setId(rs.getInt("id"));

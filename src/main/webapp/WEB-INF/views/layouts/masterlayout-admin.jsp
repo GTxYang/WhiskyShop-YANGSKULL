@@ -60,7 +60,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 <script src="<c:url value="/ckeditor/ckeditor.js "/>"></script>
-
+<script src="<c:url value="/ckfinder/ckfinder.js "/>"></script>
 
 
 

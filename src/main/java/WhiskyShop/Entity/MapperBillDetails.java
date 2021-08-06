@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class MapperBillDetails implements RowMapper<BillDetails> {
 
-	@Override
+
 	public BillDetails mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BillDetails billDetails = new BillDetails();
 		billDetails.setId(rs.getLong("id"));

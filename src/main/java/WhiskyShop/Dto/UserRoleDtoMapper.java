@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class UserRoleDtoMapper implements RowMapper<UserRoleDto> {
 
-	@Override
+
 	public UserRoleDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		UserRoleDto us = new UserRoleDto();
 		us.setId(rs.getInt("id"));

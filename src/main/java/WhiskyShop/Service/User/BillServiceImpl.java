@@ -22,7 +22,7 @@ public class BillServiceImpl implements IBill {
 	@Autowired
 	ProductsDao productDao;
 	
-	@Override
+	
 	public int AddBill(Bill bill) {
 		return billDao.AddBill(bill);
 

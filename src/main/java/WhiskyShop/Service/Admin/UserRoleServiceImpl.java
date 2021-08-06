@@ -15,23 +15,23 @@ public class UserRoleServiceImpl implements IUserRole {
 	@Autowired
 	UserRoleDao userRoleDao;
 	
-	@Override
+	
 	public List<UserRoleDto> getUserRoleByID(int id) {
 		return userRoleDao.getUserRoleByID(id);
 	}
 
-	@Override
+	
 	public int AddRoleForUser(Role role, int id) {
 		return userRoleDao.AddRoleForUser(role, id);
 	}
 
-	@Override
+	
 	public List<Role> getRoleUserHave(int id) {
 		
 		return userRoleDao.getListUserHave(id);
 	}
 
-	@Override
+	
 	public int DeleteUserRole(int id) {
 		return userRoleDao.DeleteUserRole(id);
 	}

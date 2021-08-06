@@ -20,6 +20,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,10 +39,21 @@ public class AccountController extends BaseController {
 	@RequestMapping(value = "/Login")
 	public ModelAndView Login(@RequestParam(value = "error",required = false ) String error, ModelMap model) {
 		_mvShare.addObject("user", new Users());
-		if (error != null) {
-			model.addAttribute("message", "Sai tên tài khoản hoặc mật khẩu");
-		}
-		_mvShare.setViewName("user/account/login");
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		 if(auth.getName().equals("anonymousUser") || auth.getName().isEmpty() ||auth.getName().isBlank() )
+		 {
+			
+			 if (error != null) {
+					model.addAttribute("message", "Sai tên tài khoản hoặc mật khẩu");	
+				}
+			 _mvShare.setViewName("user/account/login");
+			
+		 }else {
+			 _mvShare.setViewName("redirect:/userinfo/" + auth.getName());
+			 
+		 }
+
 		return _mvShare;
 	}
 
@@ -50,6 +63,8 @@ public class AccountController extends BaseController {
 //	public String admin() {
 //		return "admin/index";
 //	}
+	
+	
 	
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
@@ -113,12 +128,46 @@ public class AccountController extends BaseController {
 		return "user/account/register";
 	}
 
-	@GetMapping("/404")
-	public ModelAndView error()
+	
+//Update Thông tin account
+	@GetMapping("/userinfo/{username}")
+	public ModelAndView get_UpdateUser(@PathVariable("username") String username,@ModelAttribute("userinfo") Users user)
 	{
-		_mvShare.setViewName("user/404");
+		 user = accountService.FindUserByUsername(username);
+		_mvShare.addObject("userinfo",user);
+		_mvShare.setViewName("user/account/userinfo");
 		return _mvShare;
 	}
+	
+	@PostMapping("/userinfo/{username}")
+	public String updateAccount(ModelMap model,@ModelAttribute("userinfo") @Valid Users user,BindingResult rs)
+	{
+		model.addAttribute("menus", _homeService.getDataMenus());
+		try {
+			if(rs.hasErrors())
+			{
+				model.addAttribute("status", "111111");
+				return "user/account/userinfo";
+			}else {
+			
+				int update = accountService.updateUser(user);
+				if(update > 0)
+				{
+					model.addAttribute("status", "Cập nhập thành công");
+				}else {
+					model.addAttribute("status", "Cập nhập thành công");
+				}
+			}
+		}catch (Exception e) {
+			System.out.println(e);
+		}
+		
+
+		return "user/account/userinfo";
+	}
+	
+	
+	
 	
 	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
 			Pattern.CASE_INSENSITIVE);

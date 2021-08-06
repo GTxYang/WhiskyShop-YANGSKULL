@@ -12,12 +12,14 @@
 
 
 	<http create-session="ifRequired" use-expressions="true" auto-config="true" >
-		<csrf disabled="true" />
-
+	 <csrf disabled="true" />
+<!-- <csrf/> -->
 		<intercept-url pattern="/" access="permitAll()" />
 		<intercept-url pattern="/login" access="permitAll()" />
 		<intercept-url pattern="/logout" access="permitAll()" />
 		<intercept-url pattern="/checkout" access="isAuthenticated()" />
+		<intercept-url pattern="/userinfo/**" access="isAuthenticated()" />
+		<intercept-url pattern="/userinfo" access="isAuthenticated()" />
 
 
 		<intercept-url pattern="/userInfo" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
@@ -41,6 +43,7 @@
 			logout-success-url="/Login" 
 			delete-cookies="JSESSIONID"
 			invalidate-session="true" />
+
 
 	</http>
 	

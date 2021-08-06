@@ -70,6 +70,8 @@
 	<mvc:resources mapping="/assets/**" location="/assets/" />
 	<mvc:resources mapping="/ckeditor/**"
 		location="/ckeditor/" />
+	<mvc:resources mapping="/ckfinder/**"
+		location="/ckfinder/" />
 
 	<!-- upload ảnh -->
 	<bean id="multipartResolver"
@@ -77,7 +79,38 @@
 		<property name="maxUploadSize" value="268435456" />
 	</bean>
 
+	<!--Đa ngôn ngữ -->
 
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/i18n/messages" />
+		<property name="fallbackToSystemLocale" value="false" />
+		<property name="fileEncodings" value="UTF-8" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<!-- <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"> -->
+
+
+	<!-- Spring sẽ tạo ra 1 cookie để lưu trự là ng dùng đang ở ngôn ngữ gi 
+		2va2 duy trì nó -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="vi" />
+		<property name="cookieName" value="myAppLocaleCookie"></property>
+		<property name="cookieMaxAge" value="3600"></property>
+	</bean>
+
+	<!-- VD: whiskyshop/language=en Khai báo biến language -->
+	<mvc:interceptors>
+		<bean
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="language" />
+		</bean>
+	</mvc:interceptors>
+
+
+	
 
 
 </beans>

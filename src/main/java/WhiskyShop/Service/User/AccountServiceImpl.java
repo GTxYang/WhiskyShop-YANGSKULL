@@ -20,10 +20,14 @@ public class AccountServiceImpl implements IAccountService {
 		return accountDao.createAccount(user);
 	}
 
-	@Override
+	
 	public Users FindUserByUsername(String username) {
-
 		return accountDao.FindUserByUsername(username);
+	}
+
+	
+	public int updateUser(Users user) {
+		return accountDao.updateUser(user);
 	}
 
 }
